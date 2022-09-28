@@ -22,12 +22,14 @@ public class Main {
         clientes.forEach(System.out::println);
 
         Scanner sc = new Scanner(System.in);
-        System.out.println("Digite o id do cliente para consultar: ");
+        System.out.print("Digite o id do cliente para consultar: ");
         String idCliente = sc.nextLine();
 
         clientes.stream()
                 .filter(c -> c.getId() == Integer.parseInt(idCliente))
-                .forEach(System.out::println);
+                .findFirst()
+                .ifPresentOrElse(c -> System.out.println(c),
+                        () -> System.out.println("Não foi encontrado cliente com o id " + idCliente));
 
         sc.close();
 
